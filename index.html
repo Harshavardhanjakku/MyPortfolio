@@ -699,38 +699,43 @@
 
           <form action="" class="contact__form grid">
             <div class="contact__inputs grid">
-              <div class="contact__content">
-                <label for="" class="content__label">Name</label>
-                <input type="text" class="contact__input" />
-              </div>
-
-              <div class="contact__content">
-                <label for="" class="content__label">Email</label>
-                <input type="Email" class="contact__input" />
-              </div>
+                <div class="contact__content">
+                    <label for="name" class="content__label">Name</label>
+                    <input type="text" id="name" class="contact__input" />
+                </div>
+        
+                <div class="contact__content">
+                    <label for="email" class="content__label">Email</label>
+                    <input type="email" id="email" class="contact__input" />
+                </div>
             </div>
-
+        
             <div class="contact__content">
-              <label for="" class="content__label">Message</label>
-              <textarea
-                name=""
-                id=""
-                cols="0"
-                rows="7"
-                class="contact__input"
-              ></textarea>
+                <label for="message" class="content__label">Message</label>
+                <textarea id="message" cols="0" rows="7" class="contact__input"></textarea>
             </div>
-
+        
             <div>
-              <a
-                href=" mailto: jakkuharshavardhan2004@gmail.com?subject=Testing out mailto! &body=This is only a test!"
-                class="button button--flex"
-              >
-                Send Message
-                <i class="uil uil-message button__icon"></i>
-              </a>
+                <a href="#" class="button button--flex" id="sendMail">
+                    Send Message
+                    <i class="uil uil-message button__icon"></i>
+                </a>
             </div>
-          </form>
+        </form>
+        
+        <script>
+            document.getElementById("sendMail").addEventListener("click", function(event) {
+                event.preventDefault();
+                
+                let message = encodeURIComponent(document.getElementById("message").value);
+                let subject = encodeURIComponent("Collaboration Opportunity");
+                let email = "jakkuharshavardhan2004@gmail.com";
+        
+                let mailtoLink = `mailto:${email}?subject=${subject}&body=${message}`;
+                window.location.href = mailtoLink;
+            });
+        </script>
+        
         </div>
       </section>
     </main>
