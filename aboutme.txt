@@ -1,0 +1,54 @@
+
+1
+Jakku Harshavardhan9959667147 #jakkuharshavardhan2004@gmail.com ïLinkedin §Github —Leetcode ˆHackerrank
+Education
+SR University July 2022 – May 2026
+B.Tech in Computer Science, DSA & SE coursework, Hackathon Secretary, CGPA : 9.47
+Experience
+Hackathon Club Secretary May 2024 – May 2025
+CS & AI, SR University 1 year
+•Led planning and execution of 5+ major events including TechStorm, Anveshan 2024, Expert Talks, and a mobile app
+hackathon conducted by Zoom My Life, fostering cross-campus innovation and participation from 500+ students.
+•Migrated the Techstorm Website to a server with enhanced security protocols, preventing 3 potential cyberthreats
+and ensuring uninterrupted availability throughout the year, while working with limited resources.
+AWS Cloud Virtual Internship July 2024 – September 2024
+AWS Cloud Intern 1 month
+•Leveraged AWS services, including S3 for scalable storage and EC2 for web hosting, improving operational efficiency
+and reducing costs by 30%.
+Triyas Tech Solutions March 2024 – September 2024
+Full Stack Developer Intern 6 months
+•Engineered a chatbot with the Groq API to manage 10,000+ messages, improving response accuracy by 25%.
+•Enhanced the website using Next.js & Tailwind CSS, boosting page load speed by 30% & user engagement by 25%.
+Skills
+•Programming Languages |C, Python, Java, JavaScript, Dart
+•Web Technologies |HTML, CSS, Tailwind CSS, Node.js, Express.js, REST APIs
+•Frameworks & Libraries |Angular, Next.js, React, Flutter
+•Databases & Cloud |MySQL, SQLite, Oracle, PL/SQL, Firebase, AWS
+•Developer Tools |Git, GitHub, VS Code, Postman, Figma, PowerPoint
+Projects
+HerCycle+ Connect |Flutter, Dart, Firebase, NLP, APIs March 2025 – April 2025 (2 months)
+•Constructed a women’s health mobile app using Flutter and Firebase, featuring cycle tracking and symptom
+prediction; personally resolved 15+ bugs through unit testing, improving app stability for end user functionality.
+•Integrated smart recommendations within the product marketplace using user data and wearable insights, resulting
+in 30% increase in average order value within the first quarter, as the most junior developer.
+Fact Finder AI |Python, NLP, ML March 2024 – May 2024 (3 months)
+•Built and fine-tuned a machine learning NLP model for fake news detection with 92% accuracy, using tokenization
+and vectorization to optimize performance and reduce bias by 15%.
+Calendar using DS & Database Engine |C, SQLite3 August 2023 - December 2023 (5 months)
+•Created a C language calendar application using linked lists, managing over 50 events with efficient date navigation.
+•Integrated with a database, achieving 100% event persistence for reliable long-term storage and retrieval.
+Achievements
+•Ranked in the top 10 for academic GPA and CodeClash organized by the IEEE TEMS, VIT Vellore
+•Led a project that demonstrated creativity and collaboration, earning first place at the SRU Idea Conclave.
+•Designed and implemented an innovative AI chatbot during the SIH Hackathon Grand Finale, which automated
+responses for 150+ common customer queries, enabling team members to focus on complex issues.
+•Solved numerous coding challenges during a 12-hour hackathon by using algorithms to improve efficiency.
+•Secured a top 3 position in SR University’s Project Expo for Mentor Connect, winning a cash prize and selection to
+the Grand Finale; integrated advanced voice recognition for real-time accessibility in VoiceRecognition.
+•Achieved 1st place in the Launch Code DSA contest, earning CSI membership and Ranked second in the PyChamp
+Quiz by the Coding Club for excellence in daily Python challenges, demonstrating proficiency in Python
+programming and improving coding snippet efficiency by 15%.
+Certifications
+•Introduction to Front-End Development
+•Introduction to Back-End Development
+•Generative AI with Large Language Models
