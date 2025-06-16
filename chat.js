@@ -1,5 +1,4 @@
-const BACKEND_URL = "https://harshavardhan-one.vercel.app/generate";
-
+const BACKEND_URL = "https://harshavardhan-84ul.onrender.com/generate";
 const chatbotToggler = document.querySelector(".chatbot-toggler");
 const closeBtn = document.querySelector(".close-btn");
 const chatbox = document.querySelector(".chatbox");
