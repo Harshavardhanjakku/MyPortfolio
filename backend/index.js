@@ -1,5 +1,3 @@
-// backend/index.js
-
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
@@ -41,3 +39,4 @@ app.post("/generate", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Gemini backend running at http://localhost:${PORT}`);
 });
+
