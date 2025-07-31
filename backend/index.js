@@ -1,42 +1,77 @@
 const express = require("express");
-const axios = require("axios");
+const bodyParser = require("body-parser");
 const cors = require("cors");
+const fs = require("fs");
+const axios = require("axios");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-// Optional GET route for root URL
-app.get("/", (req, res) => {
-  res.send("🤖 Gemini Chatbot Backend is running!");
-});
+// Load context from aboutme.txt at startup
+const aboutText = fs.readFileSync("aboutme.txt", "utf8");
 
-// POST route to handle chatbot prompt
+// Groq API Key
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
+
+// Handle /generate POST request
 app.post("/generate", async (req, res) => {
-  const { prompt } = req.body;
+  const prompt = req.body.prompt?.trim();
 
-  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`;
+  if (!prompt) {
+    return res.status(400).json({ error: "Prompt is required" });
+  }
+
+  const fullPrompt = `
+You are a helpful assistant for Jakku Harshavardhan. You should only answer based on the content below.
+If the answer is not found, respond: "Sorry, as of now I don't have much info about him."
+
+-------------------------
+${aboutText}
+-------------------------
+
+Answer this question: "${prompt}"
+`;
 
   try {
-    const response = await axios.post(API_URL, {
-      contents: [{ parts: [{ text: prompt }] }]
-    });
+    const response = await axios.post(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        model: "llama3-70b-8192",
+        messages: [
+          { role: "system", content: "You are a helpful assistant." },
+          { role: "user", content: fullPrompt }
+        ],
+        temperature: 0.2
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${GROQ_API_KEY}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
 
-    res.json(response.data);
-  } catch (error) {
-    console.error("Error from Gemini API:", error.message);
-    res.status(500).json({
-      error: "Failed to generate response from Gemini API."
+    const reply = response.data.choices[0].message.content;
+    console.log("✅ Groq response:", reply);
+    res.json({
+      candidates: [
+        {
+          content: {
+            parts: [{ text: reply }]
+          }
+        }
+      ]
     });
+  } catch (err) {
+    console.error("❌ Error calling Groq:", err.response?.data || err.message);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`✅ Gemini backend running at http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`🚀 Server running on http://localhost:${port}`);
 });
-
