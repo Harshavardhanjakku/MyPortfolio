@@ -1,4 +1,5 @@
-const BACKEND_URL = "https://harshavardhan-84ul.onrender.com/generate";
+const BACKEND_URL = "https://fragmentstothought.onrender.com/ask";
+
 const chatbotToggler = document.querySelector(".chatbot-toggler");
 const closeBtn = document.querySelector(".close-btn");
 const chatbox = document.querySelector(".chatbox");
@@ -7,13 +8,6 @@ const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null;
 const inputInitHeight = chatInput.scrollHeight;
-
-const history = [
-  {
-    role: "user",
-    parts: [{ text: "You are a helpful assistant. Answer briefly and clearly." }]
-  }
-];
 
 // Create message UI
 const createChatLi = (message, className) => {
@@ -28,32 +22,26 @@ const createChatLi = (message, className) => {
   return chatLi;
 };
 
-// Generate Gemini response via backend
-const generateResponse = async (chatElement) => {
+// Generate response from RAG backend
+const generateResponse = async (chatElement, question) => {
   const messageElement = chatElement.querySelector("p");
-
-  const requestBody = {
-    prompt: history.map((entry) => entry.parts[0].text).join("\n")
-  };
 
   try {
     const response = await fetch(BACKEND_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({ question })
     });
 
     const data = await response.json();
 
-    if (!response.ok || !data.candidates) throw new Error(data.error?.message || "API error");
+    if (!response.ok) {
+      throw new Error(data.answer || "Server error");
+    }
 
-    const reply = data.candidates[0].content.parts[0].text;
-    messageElement.textContent = reply;
+    messageElement.textContent =
+      data.answer || "I don’t have enough information to answer that.";
 
-    history.push({
-      role: "model",
-      parts: [{ text: reply }]
-    });
   } catch (error) {
     messageElement.classList.add("error");
     messageElement.textContent = "⚠️ " + error.message;
@@ -76,16 +64,13 @@ const handleChat = () => {
   chatbox.appendChild(outgoingLi);
   chatbox.scrollTo(0, chatbox.scrollHeight);
 
-  // Add to history
-  history.push({ role: "user", parts: [{ text: userMessage }] });
-
-  // Show bot thinking
+  // Bot thinking
   setTimeout(() => {
     const incomingChatLi = createChatLi("Thinking...", "incoming");
     chatbox.appendChild(incomingChatLi);
     chatbox.scrollTo(0, chatbox.scrollHeight);
-    generateResponse(incomingChatLi);
-  }, 600);
+    generateResponse(incomingChatLi, userMessage);
+  }, 500);
 };
 
 // Auto-grow input
@@ -94,9 +79,9 @@ chatInput.addEventListener("input", () => {
   chatInput.style.height = `${chatInput.scrollHeight}px`;
 });
 
-// Send on Enter (desktop)
+// Send on Enter
 chatInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+  if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     handleChat();
   }
@@ -106,5 +91,10 @@ chatInput.addEventListener("keydown", (e) => {
 sendChatBtn.addEventListener("click", handleChat);
 
 // Toggle chat visibility
-closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
-chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+closeBtn.addEventListener("click", () =>
+  document.body.classList.remove("show-chatbot")
+);
+
+chatbotToggler.addEventListener("click", () =>
+  document.body.classList.toggle("show-chatbot")
+);
